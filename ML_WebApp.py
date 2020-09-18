@@ -15,8 +15,8 @@ import os
 st.title('Machine Learning Web App')
 '---------------------------------------------------------'
 #text
-image = Image.open(os.path.join('ml.jpg'))
-st.image(image)
+#image = Image.open(os.path.join('ml.jpg'))
+#st.image(image)
 
 st.write("""
 # Explore different classifier and datasets
@@ -34,7 +34,7 @@ classifier_name = st.sidebar.selectbox(
     'Select classifier',
     ('KNN', 'SVM', 'Random Forest')
 )
-
+####Choose DataSets####
 def get_dataset(name):
     data = None
     if name == 'Iris':
@@ -83,7 +83,6 @@ def get_classifier(clf_name, params):
 
 clf = get_classifier(classifier_name, params)
 #### CLASSIFICATION ####
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
 
 clf.fit(X_train, y_train)
@@ -95,7 +94,6 @@ st.write(f'Classifier = {classifier_name}')
 st.write(f'Accuracy =', acc)
 
 #### PLOT DATASET ####
-# Project the data onto the 2 primary principal components
 pca = PCA(2)
 X_projected = pca.fit_transform(X)
 
@@ -110,6 +108,4 @@ plt.scatter(x1, x2,
 plt.xlabel('Principal Component 1')
 plt.ylabel('Principal Component 2')
 plt.colorbar()
-
-#plt.show()
 st.pyplot()
