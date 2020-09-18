@@ -11,12 +11,12 @@ from sklearn.metrics import accuracy_score
 from PIL import Image
 import os
 
-#title
+# title
 st.title('Machine Learning Web App')
 '---------------------------------------------------------'
-#text
-#image = Image.open(os.path.join('ml.jpg'))
-#st.image(image)
+# text
+# image = Image.open(os.path.join('ml.jpg'))
+# st.image(image)
 
 st.write("""
 # Explore different classifier and datasets
@@ -34,6 +34,8 @@ classifier_name = st.sidebar.selectbox(
     'Select classifier',
     ('KNN', 'SVM', 'Random Forest')
 )
+
+
 ####Choose DataSets####
 def get_dataset(name):
     data = None
@@ -49,9 +51,11 @@ def get_dataset(name):
     y = data.target
     return X, y
 
+
 X, y = get_dataset(dataset_name)
 st.write('Shape of dataset:', X.shape)
 st.write('number of classes:', len(np.unique(y)))
+
 
 def add_parameter_ui(clf_name):
     params = dict()
@@ -68,7 +72,9 @@ def add_parameter_ui(clf_name):
         params['n_estimators'] = n_estimators
     return params
 
+
 params = add_parameter_ui(classifier_name)
+
 
 def get_classifier(clf_name, params):
     clf = None
@@ -78,8 +84,9 @@ def get_classifier(clf_name, params):
         clf = KNeighborsClassifier(n_neighbors=params['K'])
     else:
         clf = clf = RandomForestClassifier(n_estimators=params['n_estimators'],
-            max_depth=params['max_depth'], random_state=1234)
+                                           max_depth=params['max_depth'], random_state=1234)
     return clf
+
 
 clf = get_classifier(classifier_name, params)
 #### CLASSIFICATION ####
@@ -102,8 +109,8 @@ x2 = X_projected[:, 1]
 
 fig = plt.figure()
 plt.scatter(x1, x2,
-        c=y, alpha=0.8,
-        cmap='viridis')
+            c=y, alpha=0.8,
+            cmap='viridis')
 
 plt.xlabel('Principal Component 1')
 plt.ylabel('Principal Component 2')
